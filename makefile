@@ -1,12 +1,13 @@
 TB_DIRS = tb/or_gate
+SCRIPT_DIR = scripts
 
 .PHONY: all
 all:
-	vivado -mode batch -source build_scripts/full_implementation.tcl
+	vivado -mode batch -source $(SCRIPT_DIR)/full_implementation.tcl
 
 .PHONY: sim_or_gate
 sim_or_gate:
-	bash build_scripts/run_tb.sh or_gate testbench
+	bash $(SCRIPT_DIR)/run_tb.sh or_gate testbench
 
 .PHONY: clean
 clean:
