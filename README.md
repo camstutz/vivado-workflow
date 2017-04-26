@@ -3,7 +3,7 @@
 This repository provides the basic structures for a non-project based vivado
 work flow. The project is set up for the use of Git and GNU Make.
 
-Vivado version: 2016.4
+Vivado version: 2017.1
 
 ## Directories: ##
    * build_scripts: scripts that build the design

@@ -1,2 +1,9 @@
+################################################################################
+# Author : Christian Amstutz
+# Date   : 2017-04-26
+#
+# Sources that are included into the simulation of the testbench.
+################################################################################
+
 vhdl xil_defaultlib "tb_or_gate.vhdl"
 vhdl xil_defaultlib "../../rtl/or_gate.vhdl"

@@ -1,13 +1,18 @@
-#!/usr/bin/bash
+################################################################################
+# Author : Christian Amstutz
+# Date   : 2017-04-26
+#
+# Shell script that managages the simulation of testbenches.
+################################################################################
 
-TB_NAME=$1
-TB_FOLDER="$TB_NAME"
+TB_DIR="$1"
+TB_NAME="${TB_DIR##*/}"
 TOP_DESIGN=$2
-SIM_SCRIPT=full_sim.tcl
+SIM_SCRIPT=${TB_DIR}/full_sim.tcl
+OUTPUT_DIR="output"
+WAV_OUTPUT_DIR=${OUTPUT_DIR}/wavedb
 
-cd tb/$TB_FOLDER
+xelab -prj $TB_DIR/tb.prj -s ${TB_NAME}_sim xil_defaultlib.$TOP_DESIGN -debug typical
 
-xelab -prj tb.prj -s ${TB_NAME}_sim xil_defaultlib.$TOP_DESIGN -debug typical
-xsim ${TB_NAME}_sim -wdb simulate_xsim.wdb --gui -tclbatch $SIM_SCRIPT
-
-cd ../..
+mkdir ${WAV_OUTPUT_DIR} -p
+xsim ${TB_NAME}_sim -wdb ${WAV_OUTPUT_DIR}/${TB_NAME}.wdb -tclbatch $SIM_SCRIPT --gui

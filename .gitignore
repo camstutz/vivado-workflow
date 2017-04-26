@@ -1,15 +1,14 @@
 # Directories
 .Xil
 xsim.dir
-vivado
+output
 
 # File types
 *.log
 *.jou
-*.wdb
 
 # specific files
-or_gate.bit
+workflow_test.bit
 
 vivado_pid*.str
 xelab.pb
