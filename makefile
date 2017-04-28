@@ -24,5 +24,5 @@ clean:
 	-@rm *.log -f
 	-@rm *.jou -f
 	-@rm vivado_pid*.str -f
-	-@rm xelab.pb
+	-@rm xelab.pb -f
 	@bash $(SCRIPT_DIR)/clean_ip_folder.sh $(IP_DIRS)
