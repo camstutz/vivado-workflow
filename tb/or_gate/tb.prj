@@ -6,4 +6,4 @@
 ################################################################################
 
 vhdl xil_defaultlib "tb_or_gate.vhdl"
-vhdl xil_defaultlib "../../rtl/or_gate.vhdl"
+vhdl xil_defaultlib "../../src/rtl/or_gate.vhdl"

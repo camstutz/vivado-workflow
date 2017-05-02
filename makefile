@@ -1,9 +1,7 @@
 ################################################################################
 # Author : Christian Amstutz
-# Date   : 2017-04-26
+# Date   : 2017-05-02
 ################################################################################
-
-IP_DIRS = ip/multiplier
 
 SCRIPT_DIR = scripts
 
@@ -17,6 +15,7 @@ sim_or_gate:
 
 .PHONY: clean
 clean:
+	vivado -mode batch -source $(SCRIPT_DIR)/clean_up_ips.tcl
 	-@rm workflow_test.bit -f
 	-@rm output -r -f
 	-@rm .Xil -r -f
@@ -25,4 +24,3 @@ clean:
 	-@rm *.jou -f
 	-@rm vivado_pid*.str -f
 	-@rm xelab.pb -f
-	@bash $(SCRIPT_DIR)/clean_ip_folder.sh $(IP_DIRS)

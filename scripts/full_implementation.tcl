@@ -1,29 +1,23 @@
 ################################################################################
 # Author : Christian Amstutz
-# Date   : 2017-04-26
+# Date   : 2017-05-02
 #
 # This scripts runs a full implementation of a Vivado project.
 ################################################################################
 
-# evaluate current directory
-set currentDir [file dirname [info script]]
-
 # Read project settings from file
-if { [catch {source [file join $currentDir project_settings.tcl]} errmsg] } {
-    puts "Error in Vivado automation script : ${errmsg}"
-    exit
-}
+set current_dir [file dirname [info script]]
+source [file join $current_dir project_settings.tcl]
 
-# Read source files
-read_vhdl "rtl/top_workflow.vhdl"
-read_vhdl "rtl/or_gate.vhdl"
-
-# Read IPs
 set_property part $fpga_part [current_project]
-read_ip "ip/multiplier/multiplier.xci"
 
-set_property generate_synth_checkpoint false [get_files ip/multiplier/multiplier.xci];
-generate_target all [get_ips multiplier]
+# Generate IPs with OOC runs
+foreach ip [get_ips] {
+  set ip_filename [get_property IP_FILE $ip]
+  set_property generate_synth_checkpoint true [get_files $ip_filename]
+}
+generate_target all [get_ips]
+synth_ip [get_ips]
 
 # disable the use of IP constraints
 #set multiplier_xdc [get_files -of_objects [get_files ip/multiplier/multiplier.xci] -filter {FILE_TYPE == XDC}]
@@ -45,9 +39,6 @@ synth_design -top $top_design -part $fpga_part
 write_checkpoint -force $checkpointDir/post_synth
 report_timing_summary -file $reportDir/post_synth_timing_summary.rpt
 report_power -file $reportDir/post_synth_power.rpt
-
-# Read constraints
-read_xdc "constraints/workflow_test.xdc"
 
 # Optimize and place the design
 opt_design
