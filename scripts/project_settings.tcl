@@ -28,7 +28,7 @@ read_ip "$ip_dir/multiplier/multiplier.xci"
 
 # Read Block Designs ###########################################################
 list bd_paths
-lappend bd_paths src/bd/LLRF_interc_bd/LLRF_interc_bd.tcl
+lappend bd_paths src/bd/multiply_bd/multiply_bd_bd.tcl
 
 # Read constraints #############################################################
 read_xdc "$constr_dir/workflow_test.xdc"

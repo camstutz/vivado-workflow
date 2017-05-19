@@ -19,21 +19,19 @@ set_property TARGET_LANGUAGE VHDL [current_project]
 set_property SIMULATOR_LANGUAGE Mixed [current_project]
 
 # Block diagrams have been tested but not fully integrated to the workflow
-## Generate Block Designs (BD)
-#foreach bd $bd_paths {
-#  set bd_path [file dirname $bd]
-#  cd $bd_path
-#  source [file tail $bd]
-#  cd $current_dir
-#  set bd_config_file "$bd_path/.srcs/sources_1/bd/LLRF_interc_bd/LLRF_interc_bd.bd"
-#  generate_target all [get_files $bd_config_file]
-#
-#  # if already existing
-#  #read_bd "$bd_dir/LLRF_interc_bd/LLRF_interc_bd.bd"
-#
-#  # necessary for synthesis?
-#  #read_vhdl -library work [ glob .srcs/sources_1/bd/design_1/hdl/design_1.vhd ]
-#}
+# Generate Block Designs (BD)
+foreach bd $bd_paths {
+  set bd_path [file dirname $bd]
+  set bd_name [file rootname [file tail $bd]]
+  # remove trailing '_bd'
+  regsub {_bd$} $bd_name {} bd_name
+
+  cd $bd_path
+  source [file tail $bd]
+  cd $current_dir
+  set bd_config_file "$bd_path/.srcs/sources_1/bd/$bd_name/$bd_name.bd"
+  generate_target all [get_files $bd_config_file]
+}
 
 # Create list of non block design IPs
 list non_bd_ips
