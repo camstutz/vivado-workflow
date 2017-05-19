@@ -2,10 +2,8 @@
 # Author : Christian Amstutz
 # Date   : 2017-05-18
 #
-# Testbench specific script that controls the simulation within Xilinx xsim.
+# VHDL sources that are included into the simulation of the testbench.
 ################################################################################
 
-#open_wave_config simulate_xsim.wcfg
-
-add_wave /
-run all
+vhdl xil_defaultlib "tb_or_gate.vhdl"
+vhdl xil_defaultlib "../../src/rtl/or_gate.vhdl"

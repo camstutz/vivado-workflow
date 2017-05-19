@@ -1,29 +1,67 @@
 ################################################################################
 # Author : Christian Amstutz
-# Date   : 2017-05-02
+# Date   : 2017-05-18
 #
 # This scripts runs a full implementation of a Vivado project.
 ################################################################################
 
+# Save current path
+set current_dir [pwd]
+
 # Read project settings from file
-set current_dir [file dirname [info script]]
-source [file join $current_dir project_settings.tcl]
+set script_dir [file dirname [info script]]
+source [file join $script_dir project_settings.tcl]
 
 set_property part $fpga_part [current_project]
+#set_property BOARD_PART $board_part [current_project]
+set_property DEFAULT_LIB $default_library [current_project]
+set_property TARGET_LANGUAGE VHDL [current_project]
+set_property SIMULATOR_LANGUAGE Mixed [current_project]
 
-# Generate IPs with OOC runs
+# Block diagrams have been tested but not fully integrated to the workflow
+## Generate Block Designs (BD)
+#foreach bd $bd_paths {
+#  set bd_path [file dirname $bd]
+#  cd $bd_path
+#  source [file tail $bd]
+#  cd $current_dir
+#  set bd_config_file "$bd_path/.srcs/sources_1/bd/LLRF_interc_bd/LLRF_interc_bd.bd"
+#  generate_target all [get_files $bd_config_file]
+#
+#  # if already existing
+#  #read_bd "$bd_dir/LLRF_interc_bd/LLRF_interc_bd.bd"
+#
+#  # necessary for synthesis?
+#  #read_vhdl -library work [ glob .srcs/sources_1/bd/design_1/hdl/design_1.vhd ]
+#}
+
+# Create list of non block design IPs
+list non_bd_ips
 foreach ip [get_ips] {
+  set ip_filename [get_property IP_FILE $ip]
+  if ![string match "*$bd_dir*" "$ip_filename"] {
+    lappend non_bd_ips $ip
+  }
+}
+
+# Enable Out-Of-Context syntehsis for IPs
+foreach ip $non_bd_ips {
   set ip_filename [get_property IP_FILE $ip]
   set_property generate_synth_checkpoint true [get_files $ip_filename]
 }
-generate_target all [get_ips]
-synth_ip [get_ips]
 
-# disable the use of IP constraints
-#set multiplier_xdc [get_files -of_objects [get_files ip/multiplier/multiplier.xci] -filter {FILE_TYPE == XDC}]
-#set_property is_enabled false [get_files $multiplier_xdc]
+generate_target all [get_ips $non_bd_ips]
 
-# define and create output directories
+## Disable the use of IP constraints
+#foreach ip $non_bd_ips {
+#  set ip_filename [get_property IP_FILE $ip]
+#  set ip_xdc [get_files -of_objects [get_files $ip_filename] -filter {FILE_TYPE == XDC}]
+#  set_property is_enabled false $ip_xdc
+#}
+
+synth_ip [get_ips $non_bd_ips]
+
+# define and create project output directories
 set outputDir ./output
 set checkpointDir $outputDir/checkpoints
 file mkdir $checkpointDir

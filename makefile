@@ -1,6 +1,6 @@
 ################################################################################
 # Author : Christian Amstutz
-# Date   : 2017-05-02
+# Date   : 2017-05-19
 ################################################################################
 
 SCRIPT_DIR = scripts
@@ -20,7 +20,8 @@ clean:
 	-@rm output -r -f
 	-@rm .Xil -r -f
 	-@rm xsim.dir -r -f
-	-@rm *.log -f
-	-@rm *.jou -f
+	-@rm ./*.log -f
+	-@rm ./*.jou -f
 	-@rm vivado_pid*.str -f
-	-@rm xelab.pb -f
+	-@rm ./*.pb -f
+	-@rm ./results.txt -f
