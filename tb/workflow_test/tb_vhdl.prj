@@ -1,0 +1,16 @@
+################################################################################
+# Author : Christian Amstutz
+# Date   : 2017-05-21
+#
+# VHDL sources that are included into the simulation of the testbench.
+################################################################################
+
+vhdl xil_defaultlib "tb_workflow_test.vhdl"
+vhdl xil_defaultlib "../../src/rtl/top_workflow.vhdl"
+vhdl xil_defaultlib "../../src/rtl/or_gate.vhdl"
+
+vhdl xil_defaultlib "../../src/ip/multiplier/sim/multiplier.vhd"
+
+vhdl xil_defaultlib "../../src/bd/multiply_bd/.srcs/sources_1/bd/multiply_bd/hdl/multiply_bd_wrapper.vhd"
+vhdl xil_defaultlib "../../src/bd/multiply_bd/.srcs/sources_1/bd/multiply_bd/hdl/multiply_bd.vhd"
+vhdl xil_defaultlib "../../src/bd/multiply_bd/.srcs/sources_1/bd/multiply_bd/ip/multiply_bd_mult_gen_0_0/sim/multiply_bd_mult_gen_0_0.vhd"

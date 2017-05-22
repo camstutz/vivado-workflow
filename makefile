@@ -9,9 +9,10 @@ SCRIPT_DIR = scripts
 all:
 	vivado -mode batch -source $(SCRIPT_DIR)/full_implementation.tcl
 
-.PHONY: sim_or_gate
-sim_or_gate:
-	bash $(SCRIPT_DIR)/run_tb.sh tb/or_gate testbench
+# make target for a testbench simulation in Vivado
+.PHONY: sim_workflow_test
+sim_workflow_test:
+	bash $(SCRIPT_DIR)/run_tb.sh tb/workflow_test testbench
 
 .PHONY: clean
 clean:

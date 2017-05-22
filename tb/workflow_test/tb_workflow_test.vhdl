@@ -1,27 +1,45 @@
--- Testbench for OR gate
+-- Testbench for workflow_test
 library IEEE;
 use IEEE.std_logic_1164.all;
 
 entity testbench is
--- empty
+  -- empty
 end testbench;
 
 architecture tb of testbench is
 
 -- DUT component
-component or_gate is
-port(
-  a: in std_logic;
-  b: in std_logic;
-  q: out std_logic);
-end component;
+component top_workflow is
+  port (
+    sys_clk: in std_logic;
+    a_in:    in std_logic;
+    b_in:    in std_logic;
+    p_out:  out std_logic_vector(3 downto 0);
+    q_out:  out std_logic;
+    r_out:  out std_logic_vector(3 downto 0)
+  );
+end component top_workflow;
 
-signal a_in, b_in, q_out: std_logic;
+signal clk : std_logic := '0';
+signal a_in, b_in, q_out : std_logic;
+signal p_out : std_logic_vector(3 downto 0);
+signal r_out : std_logic_vector(3 downto 0);
 
 begin
 
-  -- Connect DUT
-  DUT: or_gate port map(a_in, b_in, q_out);
+  -- Connect design with testbench
+  DUT : top_workflow port map
+  (
+    sys_clk => clk,
+    a_in    => a_in,
+    b_in    => b_in,
+    p_out   => p_out,
+    q_out   => q_out,
+    r_out   => r_out
+  );
+
+  --CLOCK:
+  clk <= not clk after 0.5 ns;
 
   process
   begin

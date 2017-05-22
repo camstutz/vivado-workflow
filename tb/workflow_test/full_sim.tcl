@@ -8,4 +8,4 @@
 #open_wave_config simulate_xsim.wcfg
 
 add_wave /
-run all
+run 10 ns

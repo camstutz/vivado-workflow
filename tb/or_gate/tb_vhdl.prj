@@ -1,9 +1,0 @@
-################################################################################
-# Author : Christian Amstutz
-# Date   : 2017-05-18
-#
-# VHDL sources that are included into the simulation of the testbench.
-################################################################################
-
-vhdl xil_defaultlib "tb_or_gate.vhdl"
-vhdl xil_defaultlib "../../src/rtl/or_gate.vhdl"

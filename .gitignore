@@ -13,4 +13,5 @@ workflow_test.bit
 vivado_pid*.str
 xelab.pb
 xvdl.pb
+xvhdl.pb
 xvlog.pb
