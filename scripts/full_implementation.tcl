@@ -20,7 +20,7 @@ set_property SIMULATOR_LANGUAGE Mixed [current_project]
 
 # Block diagrams have been tested but not fully integrated to the workflow
 # Generate Block Designs (BD)
-foreach bd $bd_paths {
+foreach bd $block_designs {
   set bd_path [file dirname $bd]
   set bd_name [file rootname [file tail $bd]]
   # remove trailing '_bd'

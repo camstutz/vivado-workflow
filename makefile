@@ -15,7 +15,7 @@ sim_or_gate:
 
 .PHONY: clean
 clean:
-	vivado -mode batch -source $(SCRIPT_DIR)/clean_up_ips.tcl
+	vivado -mode batch -source $(SCRIPT_DIR)/clean_up_generated.tcl
 	-@rm workflow_test.bit -f
 	-@rm output -r -f
 	-@rm .Xil -r -f

@@ -27,8 +27,8 @@ read_vhdl "$rtl_dir/or_gate.vhdl"
 read_ip "$ip_dir/multiplier/multiplier.xci"
 
 # Read Block Designs ###########################################################
-list bd_paths
-lappend bd_paths src/bd/multiply_bd/multiply_bd_bd.tcl
+list block_designs
+lappend block_designs src/bd/multiply_bd/multiply_bd_bd.tcl
 
 # Read constraints #############################################################
 read_xdc "$constr_dir/workflow_test.xdc"
