@@ -1,6 +1,6 @@
 ################################################################################
 # Author : Christian Amstutz
-# Date   : 2017-05-19
+# Date   : 2017-06-29
 ################################################################################
 
 SCRIPT_DIR = scripts
@@ -13,6 +13,12 @@ all:
 .PHONY: sim_workflow_test
 sim_workflow_test:
 	bash $(SCRIPT_DIR)/run_tb.sh tb/workflow_test testbench
+
+# target for automated documentation creation
+.PHONY: doc
+doc:
+	doxygen doc/doxygen/doxyfile
+	-@ln -s ./html/index.html doc/doxygen/index.html -f
 
 .PHONY: clean
 clean:

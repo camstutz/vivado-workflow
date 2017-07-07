@@ -2,16 +2,25 @@
 .Xil
 xsim.dir
 output
+doc/doxygen/html
 
 # File types
 *.log
 *.jou
+*.mif
+*.gch
 
 # specific files
-workflow_test.bit
+doc/doxygen/index.html
 
 vivado_pid*.str
 xelab.pb
 xvdl.pb
 xvhdl.pb
 xvlog.pb
+fsm_encoding.os
+doc/doxygen/index.html
+
+# project specific files
+workflow_test.bit
+workflow_test.ltx

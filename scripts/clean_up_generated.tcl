@@ -17,7 +17,7 @@ set_property ip_repo_paths $user_ip_repo [current_fileset]
 update_ip_catalog
 
 # Create list of non block design IPs
-list non_bd_ips
+set non_bd_ips [list]
 foreach ip [get_ips] {
   set ip_filename [get_property IP_FILE $ip]
   if ![string match "*$bd_dir*" "$ip_filename"] {
